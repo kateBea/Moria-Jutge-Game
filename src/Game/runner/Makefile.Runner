@@ -1,0 +1,9 @@
+OPTIONS = -Wall -Wextra -Wpedantic
+
+build: runner
+
+runner: runner.c
+	gcc -o runner runner.c $(OPTIONS)
+
+clean:
+	rm runner result_instance_* default_*.res

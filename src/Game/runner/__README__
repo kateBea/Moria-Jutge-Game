@@ -1,0 +1,17 @@
+NOTE: program still assumes users provides correct arguments
+for the different options. Error check still on the table
+to be delivered sometime in the future
+
+-> compile using makefile provided (Makefile.Runner)
+-> the makefile also cleans up the files created by the program as there can be many 
+   resulting from multiple games ran (this if you didnt especify the file output prefix)
+-> copy Makefile.Runner and runner.c to your Game binary root folder
+->remember to have default.cnf with proper setup for the game provided
+
+-> rules:
+    make -f Makefile.Runner clean (remove program from current directory and all generated files resulting from running game)
+    make -f Makefile.Runner build (build game and create and executable binary)
+    
+example of commands; 
+    ./runner -s 30 -n 4 -p Kate Dummy Dummy Dummy
+    ./runner -s 25 -n 3 -p Dummy Dummy Dummy Dummy

@@ -1,0 +1,15 @@
+JUEGO NOTAS
+
+- los dwarves son los personajes principales del juego (empiezo con 20)
+- yo puedo controlar dwarves y wizards
+- mis dwarves empiezan con 100 puntos de salud, cuando atacan la unidad atacada pierde entre 20 y 40 puntos de salud
+- El Balrog solo ataca y mata todo lo que hay a su alrededor
+- los dwarves se pueden mover solo a celdas de tipo cueva o exterior
+- una celda de tipo roca atacada 5 veces por un dwarf (u otros) se convierte en abismo con probabilidad de 4%, sino se convierte en cueva
+- si te mueves a un abismo sin un orc te mueres inmediatamente
+- cuando nos movemos a una celda de tipo cueva sin otro dwarf esta se convierte en nuestra celda (la conquistamos)
+- los dwarves se pueden mover verticalmente, horizontalmente y diagonalmente
+- al principio del juego tengo 5 wizards
+- los wizards son lentos, empieza el juego con 50 puntos de salud, no pueden atacar otras unidades, no conquistan celdas tipo cueva
+- los wizards solo se pueden mover horizontalmente
+- si hay una unidad mía (dwarf) en linea vertizal u horzinontal que se cruza con el wizards, el wizard lo cura a full hp
