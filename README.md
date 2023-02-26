@@ -2,6 +2,8 @@
 
 Repositori del Joc d'EDA
 
+1. Introducció:
+
 Es tracta d'un joc per a quatre jugadors, identificat amb números de 0 a 3. Cada
 jugador té el control d'un clan de nans ajudats per alguns mags. L'objectiu del
 joc és dominar l’antic regne de Mòria.
@@ -43,3 +45,8 @@ horitzontalment, verticalment i en diagonal a les cel·les Exteriors i les de ti
 Captura de partida de dummies:
 
 ![Demo picture](/info/demo.png)
+
+2. Jugadors implementats:
+
+- [Kate](src/Game/AIKate.cc) 
+- [UserIsTaken](src/Game/AIUserIsTaken.cc)
