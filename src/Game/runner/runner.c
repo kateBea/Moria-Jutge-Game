@@ -1,18 +1,18 @@
 /**
  * @file runner.c
 
- * @author kate (zanetty54@gmail.com)
+ * @author hugo
  * @brief 
  * @version 1.0
  * @date 2022-05-13
  * @copyright Copyright (c) 2022
  */
 
-/*NOTE: program still assumes users provides correct arguments*/
-/*for the different options. Error check still on the table*/
-/*to be delivered sometime in the future*/
+/* NOTE: program still assumes users provides correct arguments */
+/* for the different options. Error check still on the table */
+/* to be delivered sometime in the future? :-) */
 
-/*__README__ FOR MORE INFO*/
+/* __README__ FOR MORE INFO */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -42,7 +42,7 @@
 #define VERSION_MAJOR   1
 #define VERSION_MINOR   0
 
-/*compare two strings. return true if they match exactly*/
+/* compare two strings. return true if they match exactly */
 bool string_comp(const char* str1, const char* str2)
 {
     bool result = true;
@@ -60,59 +60,76 @@ bool string_comp(const char* str1, const char* str2)
     return result;
 }
 
-/*program usage help*/
+/* program usage help */
 void usage(void)
 {
+    // sprintf was used in combination with write for the sake of practice since 
+    // it was the way to write to files used in SO. Both of these calls could be
+    // replaced by printf or refactored to a function :-)
+
     char output_buffer[BUFFERSIZE];
     sprintf(output_buffer, "usage: ./runner [OPTIONS]...\n");
     write(STDOUT, output_buffer, strlen(output_buffer));
+
     sprintf(output_buffer, "this program runs Moria games with random seeds\n");
     write(STDOUT, output_buffer, strlen(output_buffer));
+
     sprintf(output_buffer, "enter --help command for more help on commands\n");
     write(STDOUT, output_buffer, strlen(output_buffer));
+
     exit(EXIT_SUCCESS);
 }
 
-/*display program version*/
+/* display program version */
 void display_version(void)
 {
     char output_buffer[BUFFERSIZE];
+
     sprintf(output_buffer, "Moria runner scuffed: %d.%d\n", VERSION_MAJOR, VERSION_MINOR);
     write(STDOUT, output_buffer, strlen(output_buffer));
+
     sprintf(output_buffer, "release date: 5/13/2022 3:54 AM\n");
     write(STDOUT, output_buffer, strlen(output_buffer));
+
     exit(EXIT_SUCCESS);
 }
 
-/*print str to std error and exit program*/
+/* print str to std error and exit program */
 void error_and_exit(const char* str, int ex_cd)
 {
     perror(str); exit(ex_cd);
 }
 
-/*display program help*/
+/* display program help */
 void display_help(void)
 {
     char buffer[BUFFERSIZE];
     sprintf(buffer, "./runner --help\n");
     write(STDOUT, buffer, strlen(buffer));
+
     sprintf(buffer, "\t(p): enter game players -> -p player1 player2 player3 player4\n");
     write(STDOUT, buffer, strlen(buffer));
+
     sprintf(buffer, "\t(s): enter game seed -> -s [seed_value]\n");
     write(STDOUT, buffer, strlen(buffer));
+
     sprintf(buffer, "\t(n): enter number of games -> -n [number_games]\n");
     write(STDOUT, buffer, strlen(buffer));
+
     sprintf(buffer, "\t(o): enter file output suffix -> -o file_name_suffix\n");
     write(STDOUT, buffer, strlen(buffer));
+
     sprintf(buffer, "\t(version): display program version and exit -> --version\n");
     write(STDOUT, buffer, strlen(buffer));
+
     sprintf(buffer, "\t(help): display program help and exit -> --help\n");
     write(STDOUT, buffer, strlen(buffer));
     exit(EXIT_SUCCESS);
 }
 
 int main(int argc, char** argv)
-{
+{   
+    // Arguments parsing
     char option_pos[4];
     option_pos[0] = option_pos[1] = -1;
     option_pos[2] = option_pos[3] = -1;
@@ -141,9 +158,14 @@ int main(int argc, char** argv)
 
     }
 
-    if (argc < 3) usage();
+    // end arguments parsing
+
+
+    // Argument count check
+    if (argc < 3) 
+        usage();
     
-    /*must specify at least number of games*/
+    /* must specify at least number of games */
     if (option_pos[0] == -1) 
     {
         char buff[128];
@@ -152,7 +174,7 @@ int main(int argc, char** argv)
         exit(EXIT_SUCCESS);
     }
 
-    /*must specify all players*/
+    /* must specify all players */
     if (option_pos[2] == -1) 
     {
         char buff[128];
@@ -161,7 +183,9 @@ int main(int argc, char** argv)
         exit(EXIT_SUCCESS);
     }
     
+    // number of games to play
     int n_GAMES = atoi(argv[option_pos[0]+1]);
+
     for (int i = 0; i < n_GAMES; ++i)
     {
         pid_t game_instance = fork();
@@ -189,8 +213,8 @@ int main(int argc, char** argv)
                 "-s",
                 argv[(option_pos[1]+1)],
                 "-i",
-                "default.cnf",  //this file should containt the game info such board size, 
-                                //etc we need one per game unless you want to run games with different setupos
+                "default.cnf",  // this file should containt the game info such board size, 
+                                // etc we need one per game unless you want to run games with different setups
                 "-o",
                 default_res,
                 (char*)NULL
@@ -198,8 +222,9 @@ int main(int argc, char** argv)
             execvp("./Game", arguments);
         }
     }
-    while (waitpid(-1, NULL, 0) > 0);
 
+    while (waitpid(-1, NULL, 0) > 0)
+        ;
 
-
+    return 0;
 }

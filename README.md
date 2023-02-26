@@ -48,5 +48,7 @@ Captura de partida de dummies:
 
 ## Jugadors implementats
 
-- [Kate](src/Game/AIKate.cc) 
+Llistat de jugadors implementats per participar al joc de Mòria:
+
+- [Kate](src/Game/AIKate.cc)
 - [UserIsTaken](src/Game/AIUserIsTaken.cc)
